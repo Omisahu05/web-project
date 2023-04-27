@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/851e4aee1b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript">
+      function checkname() {
+        var name = document.getElementById("First Name").value;
+        if (!isNaN(name) && name.length !== 0) {
+          document.getElementById("fnData").innerHTML =
+            "**Only characters are allowed";
+          return false;
+        } else {
+          document.getElementById("fnData").innerHTML = "";
+          return true;
+        }
+      }
+
+      function validation(event) {
+        // console.log(event.target[0]);
+
+        for (x = 0; x < event.target.length; x++) {
+          // ---- name validation
+
+          if (event.target[x].value.trim() == "") {
+            event.preventDefault();
+            const node = document.createElement("p");
+            const text = document.createTextNode(
+              event.target[x].id + " Can't be Empty"
+            );
+            node.style.color = "red";
+            node.appendChild(text);
+            document
+              .getElementById(event.target[x].id)
+              .parentNode.insertBefore(node, event.target[x].id.nextSibling);
+            return false;
+          }
+          // email vali
+
+          //password
+        }
+      }
+      function getMyEmailValidation(ele) {
+        var text = document.getElementById("Email").value;
+        var regx =
+          /^([A-Za-z0-9]{3,20})@([A-Za-z]{3,15}).([a-z]{2,8})(.[a-z]{2,5})?$/;
+        if (regx.test(text)) {
+          document.getElementById("emailErr").innerHTML = "Valid";
+          document.getElementById("emailErr").style.visibility = "visible";
+          document.getElementById("emailErr").style.color = "green";
+        } else {
+          document.getElementById("emailErr").innerHTML = "InValid";
+          document.getElementById("emailErr").style.visibility = "visible";
+          document.getElementById("emailErr").style.color = "red";
+        }
+      }
+
+      function verifyPassword(ele) {
+        var passClass = document.getElementsByClassName("passCheck");
+        // console.log(passClass);
+        const lowerCase = new RegExp("(?=.*[a-z])");
+        const upperCase = new RegExp("(?=.*[A-Z])");
+        const number = new RegExp("(?=.*[0-9])");
+        const specialChar = new RegExp("(?=.*[!@#\$%\^&\*])");
+        const eightChar = new RegExp("(?=.*[8,])");
+        console.log(ele.value);
+        if (ele.value.length >= 8) {
+          passClass[0].style.color = "green";
+        } else {
+          passClass[0].style.color = "grey";
+        }
+        //
+        if (lowerCase.test(ele.value)) {
+          passClass[1].style.color = "green";
+        } else {
+          passClass[1].style.color = "grey";
+        }
+        //
+        if (upperCase.test(ele.value)) {
+          passClass[2].style.color = "green";
+        } else {
+          passClass[2].style.color = "grey";
+        }
+        //
+        if (number.test(ele.value)) {
+          passClass[3].style.color = "green";
+        } else {
+          passClass[3].style.color = "grey";
+        }
+        //
+        if (specialChar.test(ele.value)) {
+          passClass[4].style.color = "green";
+        } else {
+          passClass[4].style.color = "grey";
+        }
+      }
+      //confirm password
+
+      function check(data) {
+        var pass = document.getElementById("Password").value;
+        if (data.value.length > 0) {
+          if (data.value != pass) {
+            document.getElementById("rpErr").innerHTML =
+              "Confirm Password doesn't match";
+            document.getElementById("rpErr").style.color = "red";
+          } else {
+            document.getElementById("rpErr").innerHTML = "Password is correct";
+            document.getElementById("rpErr").style.color = "green";
+          }
+        } else {
+          document.getElementById("rpErr").innerHTML =
+            "Please enter confirm password";
+          document.getElementById("rpErr").style.color = "red";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <section class="h-100 bg-dark">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col">
+            <div class="card card-registration my-4">
+              <div class="row g-0">
+                <div class="col-12 col-xl-6 vh-50 d-xl-block">
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                    alt="Sample photo"
+                    class="img-fluid"
+                    style="
+                      height: 100%;
+                      width: 100%;
+                      border-top-left-radius: 0.25rem;
+                      border-bottom-left-radius: 0.25rem;
+                      object-fit: cover;
+                    "
+                  />
+                </div>
+                <div class="col-xl-6">
+                  <div class="card-body p-md-5 text-black">
+                    <h3 class="mb-5 text-uppercase">Sign up</h3>
+                    <form
+                      onsubmit="validation(event)"
+                      action="login.html"
+                      style="width: 100%; margin-left: 0"
+                    >
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input
+                              type="text"
+                              id="First Name"
+                              class="form-control form-control-lg"
+                              onkeyup="checkname()"
+                            />
+                            <label class="form-label" for="form3Example1m"
+                              >First name</label
+                            >
+                          </div>
+                          <p id="fnData" class="text-danger"></p>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input
+                              type="text"
+                              id="Last Name"
+                              class="form-control form-control-lg"
+                            />
+                            <label class="form-label" for="form3Example1n"
+                              >Last name</label
+                            >
+                          </div>
+                          <p id="lSpaceErr"></p>
+                        </div>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input
+                          type="text"
+                          id="Email"
+                          class="form-control form-control-lg"
+                          onkeyup="getMyEmailValidation(this)"
+                        />
+                        <label class="form-label" for="form3Example97"
+                          >Email ID</label
+                        >
+                        <p id="emailErr"></p>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input
+                          type="text"
+                          id="Password"
+                          class="form-control form-control-lg"
+                          onkeyup="verifyPassword(this)"
+                        />
+                        <label class="form-label" for="form3Example9"
+                          >Password</label
+                        >
+
+                        <label class="passCheck">8 characters</label>
+                        <label class="passCheck">1 lower case character</label>
+                        <label class="passCheck">1 upper case character</label>
+                        <label class="passCheck">1 numerical character</label>
+                        <label class="passCheck">1 special character</label>
+                      </div>
+
+                      <div class="form-outline mb-4">
+                        <input
+                          type="text"
+                          id="Re-type Password"
+                          class="form-control form-control-lg"
+                          onkeyup="check(this)"
+                        />
+                        <label class="form-label" for="form3Example9"
+                          >Re-type password</label
+                        >
+                        <p id="rpErr"></p>
+                      </div>
+
+                      <div class="d-flex justify-content-end pt-3">
+                        <button
+                          type="submit"
+                          class="btn btn-warning btn-lg btn-block"
+                        >
+                          Submit form
+                        </button>
+                      </div>
+                      <br />
+                    </form>
+                    <!-- form -->
+                    <div>
+                      Already a member ? <a href="login.html">Signin</a>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <p>or sign up with:</p>
+                      <button
+                        type="button"
+                        class="btn btn-link btn-floating mx-1"
+                      >
+                        <i class="fab fa-facebook-f"></i>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-link btn-floating mx-1"
+                      >
+                        <i class="fab fa-google"></i>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-link btn-floating mx-1"
+                      >
+                        <i class="fab fa-twitter"></i>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-link btn-floating mx-1"
+                      >
+                        <i class="fab fa-github"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
